@@ -7,3 +7,4 @@ python-coveralls>=2.9.0
 sphinx_rtd_theme>=0.2.4
 sphinx>=1.6.4
 flask_script>=2.0.6
+flask-sqlalchemy>=2.3.2
