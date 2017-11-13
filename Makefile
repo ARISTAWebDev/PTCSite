@@ -11,7 +11,7 @@ setup:
 	pip install -r requirements.txt
 
 clean:
-	rm -r *~
+	find . -type f \( -name '*~' \) -delete
 
 test:	
 	py.test --cov-report html --cov app tests

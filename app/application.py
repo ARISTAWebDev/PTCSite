@@ -6,8 +6,6 @@ import app as app_root
 from app.blueprints import all_blueprints
 from app.extensions import mail
 
-import app.core.authentication
-
 from flask import Flask
 
 APP_ROOT_FOLDER = os.path.abspath(os.path.dirname(app_root.__file__))
@@ -27,7 +25,7 @@ def get_config(config_class_string):
 
     return config_obj
 
-def create_app(config_obj):
+def create_app(config):
     """ Flask application factory.  Inializes and returns the Flask application.
 
     This is where blueprints are registered.
@@ -36,6 +34,8 @@ def create_app(config_obj):
     :type config_obj: See :class:`app.config`
     :returns: The initialized Flask application.
     """
+
+    config_obj = get_config(config)
 
     # Basic Flask initialization, loads the config from the config obj
     app = Flask(__name__, template_folder = TEMPLATE_FOLDER, static_folder = STATIC_FOLDER)

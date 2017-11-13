@@ -15,13 +15,15 @@ def _factory(partial_module_string, url_prefix):
     import_name = 'app.views.{}'.format(partial_module_string)
     template_folder = 'templates'
 
+
     blueprint = Blueprint(partial_module_string, import_name, template_folder = template_folder, url_prefix = url_prefix)
 
     return blueprint
 
 # The blueprints -- each is instantiated using the _facory() method
 public_mod = _factory('public.controller', '/')
+auth_mod = _factory('auth.controller', '/')
 
-all_blueprints = (public_mod)
+all_blueprints = (public_mod, auth_mod)
 """ List of all blueprints (all have been instantiated through the factory function) """
     
