@@ -1,8 +1,52 @@
-USER:
+CONFIG_FILE:
+(These are things the config file must keep track of)
+The days of PTC (in datetime objects)
+
+#########
+
+USER (either a student or an administrator, etc):
+fname
+lname
+username
+password
+osis (if student)
+four_digit (if student)
+
+#########
 
 PARENT:
+fname
+lname
+student (relationship with student, one to many)
+id (an id to use for signing up)
+
+
+#########
 
 TEACHER:
+
+
+#########
+
+DAY (to manage if students are attending, dynamically):
+date
+student (relationship with student)
+attending
+teachers_requested (relationships with teachers, one to many, to allow students to submit requests)
+teacher_assigned (relationship one to one, final teacher assigned)
+
+#########
+
+QUEUE:
+teacher (one to one)
+date (must correspond to date in config file, need mechanism of creating queues for teachers if new date is added, or new teachers are added)
+queue (relationship with QUEUE_OBJECT, to manage where people are on the queue)
+
+#########
+
+QUEUE_OBJECT:
+
+
 
 
 
