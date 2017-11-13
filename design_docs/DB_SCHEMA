@@ -29,20 +29,10 @@ student (relationship with student)
 attending
 teachers_requested (relationships with teachers, one to many, to allow students to submit requests)
 teacher_assigned (relationship one to one, final teacher assigned)
-
-#########
-
-CHECKIN
-timestamp
-user (one to many with user)
-admin (person who performed the checkin, one to many with user)
-
-######### <-- TODO: is it better to combine checkin/outs?
-
-CHECKOUT
-timestamp
-user (one to many with user)
-admin (person who performed the checkout, one to many with user)
+checked_in
+checked_in_timestamp
+checked_out
+checked_out_timestamp
 
 #########
 
