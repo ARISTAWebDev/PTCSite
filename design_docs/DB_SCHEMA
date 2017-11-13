@@ -1,6 +1,7 @@
 CONFIG_FILE:
 (These are things the config file must keep track of)
 The days of PTC (in datetime objects)
+Start times of PTC (in datetime objects)
 
 #########
 
@@ -9,8 +10,15 @@ fname
 lname
 username
 password
+email
 osis (if student)
 four_digit (if student)
+organizations (if student)
+permissions? <-- TODO: what's the best way to implement this?
+checkins (one to many with checkin)
+checkouts (one to many with checkout)
+admin_checkins (one to many with checkin)
+admin_checkouts (one to many with checkout)
 days (one to many relatinship with DAY to manage sign ups for a specific day, as well as teachers requesting and so on)
 
 #########
@@ -21,6 +29,20 @@ student (relationship with student)
 attending
 teachers_requested (relationships with teachers, one to many, to allow students to submit requests)
 teacher_assigned (relationship one to one, final teacher assigned)
+
+#########
+
+CHECKIN
+timestamp
+user (one to many with user)
+admin (person who performed the checkin, one to many with user)
+
+######### <-- TODO: is it better to combine checkin/outs?
+
+CHECKOUT
+timestamp
+user (one to many with user)
+admin (person who performed the checkout, one to many with user)
 
 #########
 
@@ -37,9 +59,13 @@ id (an id to use for signing up)
 TEACHER:
 fname
 lname
+email
+identifier
 title (Mr., Ms., Mrs.)
 room
+department
 days (one to many relationship with TEACHER_DAY to manage sign ups for a specific day, as well as students requested and so on)
+average_time (average time of meeting)
 
 #########
 
@@ -59,13 +85,9 @@ queue (relationship with QUEUE_OBJECT, to manage where people are on the queue)
 
 #########
 
-QUEUE_OBJECT:
-master_queue (many to one relationship with QUEUE)
+QUEUE_OBJECT: <-- TODO: is there a better name for this lol
+parent_queue (many to one relationship with QUEUE, queue it belongs to)
 parent (one to many relationship with PARENT)
 position (an integer, say, 1, to control what position on the queue somebody is)
 status (a string, 'waiting' if meeting hasn't occured, 'in progress' if meeting is currently happening, 'happened' if meeting has already happened)
 length (int measuring length of the meeting, only valid if the session already happened)
-
-
-
-
