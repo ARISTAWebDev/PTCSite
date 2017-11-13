@@ -11,20 +11,7 @@ username
 password
 osis (if student)
 four_digit (if student)
-
-#########
-
-PARENT:
-fname
-lname
-student (relationship with student, one to many)
-id (an id to use for signing up)
-
-
-#########
-
-TEACHER:
-
+days (one to many relatinship with DAY to manage sign ups for a specific day, as well as teachers requesting and so on)
 
 #########
 
@@ -37,6 +24,34 @@ teacher_assigned (relationship one to one, final teacher assigned)
 
 #########
 
+PARENT:
+fname
+lname
+email
+phone_number
+student (relationship with student, one to many)
+id (an id to use for signing up)
+
+#########
+
+TEACHER:
+fname
+lname
+title (Mr., Ms., Mrs.)
+room
+days (one to many relationship with TEACHER_DAY to manage sign ups for a specific day, as well as students requested and so on)
+
+#########
+
+TEACHER_DAY:
+date
+teacher (relationship to teacher)
+attending (if the teacher isn't attending a day, or doesn't want volunteers)
+students_requested (relationship with students, one to many, to allow teachers to submit requests)
+The final arrangement as to who is assigned to who is handled in the relationship between TEACHER and DAY (which is related to students)
+
+#########
+
 QUEUE:
 teacher (one to one)
 date (must correspond to date in config file, need mechanism of creating queues for teachers if new date is added, or new teachers are added)
@@ -45,7 +60,11 @@ queue (relationship with QUEUE_OBJECT, to manage where people are on the queue)
 #########
 
 QUEUE_OBJECT:
-
+master_queue (many to one relationship with QUEUE)
+parent (one to many relationship with PARENT)
+position (an integer, say, 1, to control what position on the queue somebody is)
+status (a string, 'waiting' if meeting hasn't occured, 'in progress' if meeting is currently happening, 'happened' if meeting has already happened)
+length (int measuring length of the meeting, only valid if the session already happened)
 
 
 
