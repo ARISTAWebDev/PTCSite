@@ -9,6 +9,11 @@ setup:
 	virtualenv env
 	. env/bin/activate
 	pip install -r requirements.txt
+	mkdir db
+	mkdir db/testing
+	mkdir db/production
+	mkdir db/testing/migrations
+	mkdir db/production/migrations
 
 clean:
 	find . -type f \( -name '*~' \) -delete

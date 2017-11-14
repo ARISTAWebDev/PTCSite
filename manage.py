@@ -16,8 +16,23 @@ manager = Manager(create_app)
 manager.add_option('-c', '--config', dest='config', required=False)
 
 @manager.command
-def hello():
-    print 'bye'
+def create_db():
+    print 'Creating database...'
+    print 'Importing necessary libraries...'
+    
+    from migrate.versioning import api
+    from app.extensions import db
+    import os.path
+
+    db.create_all()
+    print 'Success: Database created'
+    
+    print 'Initializing migrations...'
+    if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
+        api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
+        api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
+    else:
+        api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO, api.version(SQLALCHEMY_MIGRATE_REPO))
 
 if __name__ == "__main__":
     manager.run()

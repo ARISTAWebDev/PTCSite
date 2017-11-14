@@ -16,7 +16,14 @@ class CeleryConfig(HardCoded):
     # TODO
 
 class SQLConfig(CeleryConfig):
-    """ Default Mongo Configuration """
+    """ Default SQL Configuration """
+
+    import os
+
+    basedir = os.path.abspath(os.path.dirname(__file__))
+
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/testing/app.db')
+    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db/testing/migrations/')
     
 class Config(SQLConfig):
     """ Flask Configuration global to all environments """
@@ -39,3 +46,6 @@ class Testing(Config):
 class Production(Config):
     DEBUG = False
     MAIL_SUPPRESS_SEND = False
+
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/production/app.db')
+    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db/production/migrations/')
