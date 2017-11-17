@@ -15,10 +15,6 @@ osis (if student)
 four_digit (if student)
 organizations (if student)
 permissions? <-- TODO: what's the best way to implement this?
-checkins (one to many with checkin)
-checkouts (one to many with checkout)
-admin_checkins (one to many with checkin)
-admin_checkouts (one to many with checkout)
 days (one to many relatinship with DAY to manage sign ups for a specific day, as well as teachers requesting and so on)
 
 #########
@@ -29,7 +25,7 @@ student (relationship with student)
 attending
 teachers_requested (relationships with teachers, one to many, to allow students to submit requests)
 teacher_assigned (relationship one to one, final teacher assigned)
-checked_in
+checked_in (logging will provide who checked the user in/out)
 checked_in_timestamp
 checked_out
 checked_out_timestamp
